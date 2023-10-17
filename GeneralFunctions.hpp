@@ -1,12 +1,12 @@
 #include<iostream>
-
-using namespace std;
+#include "maps.h"
 
 //Start of function declarations
 int introduction();
+string MorseCodeDecipher01(string morseInput);
 //End of function declarations
 
-int introduction(){   //explains intitial instructions for program use
+int introduction(){   //Explains intitial instructions for program use
 
     int option = 0;
 
@@ -19,5 +19,20 @@ int introduction(){   //explains intitial instructions for program use
     cin >> option;
 
     return option;
+
+}
+
+string MorseCodeDecipher01(string morseInput){   //Deciphers morse code
+
+    string morseOutput;
+
+    if(morseInput.size() == 0){
+        return;
+    }
+    if()
+
+    morseOutput = maps(morseInput);
+
+    return morseOutput;
 
 }
