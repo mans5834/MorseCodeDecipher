@@ -13,7 +13,7 @@ int main(){
         if(chosenOption == 1){
             cout << "\n\nEnter your morse code: ";
             cin >> MorseInput;
-            DecipheredMorseCode = morseCodeDecipher01(MorseInput);
+            DecipheredMorseCode = morseCodeDecipher01(MorseInput, "");
             error = 0;
 
         }else if(chosenOption == 2){
@@ -29,6 +29,9 @@ int main(){
 
     }while(error == 1);
 
-    cout << DecipheredMorseCode << endl;
-
+    if(DecipheredMorseCode == "Failure"){
+	cout << "\nThe morse code you have entered is not a word." << endl;
+    }else{
+        cout << "\nThe word you have entered has been deciphered and found to be: "<< DecipheredMorseCode << endl;
+    }
 }

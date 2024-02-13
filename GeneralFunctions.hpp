@@ -37,7 +37,7 @@ void createDictionary(){
 string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers morse code. moresInput is what is left of the string and currentString is what is being added to
 
     string morseOutput, checker, tempCurrentString;
-    char* tempMorseInput;
+    string tempMorseInput;
 
     if(morseInput.size() == 0 && currentKnownWords.currentStringInTree(currentString)){ //base case reached indicating the word is in the dictionary and should be returned
         return currentString;
@@ -47,26 +47,25 @@ string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers
 
     //Check if morse is a letter
    
-    morseInput.copy(tempMorseInput, 1, 0);
+    tempMorseInput = morseInput.substr(0,1);
     checker = maps(tempMorseInput);
     if(!(checker == "No Key")){   //check first letter
 	tempCurrentString = currentString + checker;
-	tempMorseInput = morseInput;
-	tempMorseInput.erase(0,1);
+	tempMorseInput = morseInput.substr(0, morseInput.size());
+        tempMorseInput.erase(0,1);
 	morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
-        	
 	if(morseOutput != "Failure"){
 	    return morseOutput;
 	}
     }
 
     if(morseInput.size() >= 2){
-    	morseInput.copy(tempMorseInput, 2, 0); 
+	tempMorseInput = morseInput.substr(0,2);
 	checker = maps(tempMorseInput);
-    	
+  	
 	if(!(checker == "No Key")){   //check first two letters
-            empCurrentString = currentString + checker;
-            tempMorseInput = morseInput;
+            tempCurrentString = currentString + checker;
+            tempMorseInput = morseInput.substr(0, morseInput.size());
             tempMorseInput.erase(0,2);
             morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
             
@@ -77,13 +76,13 @@ string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers
     }
 
     if(morseInput.size() >= 3){ //check first three letters
-        copy(morseInput, morseInput + 3, tempMorseInput);
-        checker = maps(tempMorseInput);
+        tempMorseInput = morseInput.substr(0,3);
+	checker = maps(tempMorseInput);
         if(!(checker == "No Key")){   //check first two letters
             tempCurrentString = currentString + checker;
-            tempMorseInput = morseInput;
+            tempMorseInput = morseInput.substr(0, morseInput.size());
             tempMorseInput.erase(0,3);
-            morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
+	    morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
 
             if(morseOutput != "Failure"){
                 return morseOutput;
@@ -92,12 +91,12 @@ string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers
     }
 
     if(morseInput.size() >= 4){ //check first three letters
-        copy(morseInput, morseInput + 4, tempMorseInput);
+	tempMorseInput = morseInput.substr(0,4);
         checker = maps(tempMorseInput);
-        if(!(checker == "No Key")){   //check first two letters
+	if(!(checker == "No Key")){   //check first two letters
             tempCurrentString = currentString + checker;
-            tempMorseInput = morseInput;
-            tempMorseInput.erase(0,4);
+            tempMorseInput = morseInput.substr(0, morseInput.size());
+	    tempMorseInput.erase(0,4); 
             morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
 
             if(morseOutput != "Failure"){ 
@@ -107,7 +106,7 @@ string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers
     }
 
 
-    return "No Matching Word.\n";
+    return "Failure";
 
 }
 

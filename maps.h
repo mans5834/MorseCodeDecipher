@@ -68,7 +68,8 @@ class Dictionary{
         
         void insertIntoTree(const string &newWord){
 	    treeNode* temp = root; //holds the current node
-	    for(char c : newWord){
+	    for(int i = 0; i < newWord.size(); i++){
+		char c = newWord[i];
 	        if(temp->children.find(c) == temp->children.end()){ //checks if the character is in any of the children nodes yet
 		    temp->children[c] = new treeNode(); //expand the tree and make the new child able to have children
 		}
@@ -81,7 +82,8 @@ class Dictionary{
 
 	bool currentStringInTree(const string currentString){ //searches the tree to see if there is a matching word or partial word;
 	    treeNode* temp = root;
-	    for(char c : currentString){
+	    for(int i = 0; i < currentString.size(); i++){
+		char c = currentString[i];
  	        if(temp->children.find(c) == temp->children.end()){
                     return false;
 		}
