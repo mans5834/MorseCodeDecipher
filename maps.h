@@ -1,4 +1,5 @@
 #include<map>
+#include<unordered_map>
 #include<string>
 
 using namespace std;
@@ -39,8 +40,53 @@ string maps(string morseLetter){   //Creates a map to associate dots and dashes 
     intToMorse["1011"] = "Y";
     intToMorse["1100"] = "Z";
 
-    Output = intToMorse.at(morseLetter);
+    if(intToMorse.find(morseLetter) == intToMorse.end()){   //checks to makesure the letter is present in the map
+        return "No Key";
+    }
 
+    Output = intToMorse.at(morseLetter);
+    //cout << Output << endl;
     return Output;
 
 }
+
+//Creating necessary tree class and struct to store words
+struct treeNode{
+    unordered_map<char, treeNode*> children;
+    bool endOfWord;
+    //constructor to initialize endOfWord
+    treeNode() : endOfWord(false){}
+};
+
+class Dictionary{
+    private:
+        treeNode* root;
+    public:
+        Dictionary(){ //initialize the root
+	    root = new treeNode();
+  	}
+        
+        void insertIntoTree(const string &newWord){
+	    treeNode* temp = root; //holds the current node
+	    for(char c : newWord){
+	        if(temp->children.find(c) == temp->children.end()){ //checks if the character is in any of the children nodes yet
+		    temp->children[c] = new treeNode(); //expand the tree and make the new child able to have children
+		}
+		
+		temp = temp->children[c];
+	    }
+            
+            temp->endOfWord = true; //the tree has stopped addign so we are at the end of the word
+	}
+
+	bool currentStringInTree(const string currentString){ //searches the tree to see if there is a matching word or partial word;
+	    treeNode* temp = root;
+	    for(char c : currentString){
+ 	        if(temp->children.find(c) == temp->children.end()){
+                    return false;
+		}
+		temp = temp->children[c];
+            }
+            return true;
+	}
+};

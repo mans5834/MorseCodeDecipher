@@ -1,12 +1,15 @@
 #include<iostream>
 #include "maps.h"
 
+Dictionary currentKnownWords; //create the dictionary that will be searched
+
 //Start of function declarations
 int introduction();
-string MorseCodeDecipher01(string morseInput);
+void createDictionary();
+string morseCodeDecipher01(string morseInput);
 //End of function declarations
 
-int introduction(){   //Explains intitial instructions for program use
+int introduction(){ //Explains intitial instructions for program use
 
     int option = 0;
 
@@ -22,17 +25,89 @@ int introduction(){   //Explains intitial instructions for program use
 
 }
 
-string MorseCodeDecipher01(string morseInput){   //Deciphers morse code
+void createDictionary(){
+    currentKnownWords.insertIntoTree("HELLO");
+    currentKnownWords.insertIntoTree("WORLD");
+    currentKnownWords.insertIntoTree("HI");
+    currentKnownWords.insertIntoTree("HOW");
+    currentKnownWords.insertIntoTree("ARE");
+    currentKnownWords.insertIntoTree("YOU");
+}
 
-    string morseOutput;
+string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers morse code. moresInput is what is left of the string and currentString is what is being added to
 
-    if(morseInput.size() == 0){
-        return;
+    string morseOutput, checker, tempCurrentString;
+    char* tempMorseInput;
+
+    if(morseInput.size() == 0 && currentKnownWords.currentStringInTree(currentString)){ //base case reached indicating the word is in the dictionary and should be returned
+        return currentString;
+    }else if(morseInput.size() == 0){   //WordNotInDictionary
+        return "Failure";
     }
-    if()
 
-    morseOutput = maps(morseInput);
+    //Check if morse is a letter
+   
+    morseInput.copy(tempMorseInput, 1, 0);
+    checker = maps(tempMorseInput);
+    if(!(checker == "No Key")){   //check first letter
+	tempCurrentString = currentString + checker;
+	tempMorseInput = morseInput;
+	tempMorseInput.erase(0,1);
+	morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
+        	
+	if(morseOutput != "Failure"){
+	    return morseOutput;
+	}
+    }
 
-    return morseOutput;
+    if(morseInput.size() >= 2){
+    	morseInput.copy(tempMorseInput, 2, 0); 
+	checker = maps(tempMorseInput);
+    	
+	if(!(checker == "No Key")){   //check first two letters
+            empCurrentString = currentString + checker;
+            tempMorseInput = morseInput;
+            tempMorseInput.erase(0,2);
+            morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
+            
+	    if(morseOutput != "Failure"){
+                return morseOutput;
+            }
+	}
+    }
+
+    if(morseInput.size() >= 3){ //check first three letters
+        copy(morseInput, morseInput + 3, tempMorseInput);
+        checker = maps(tempMorseInput);
+        if(!(checker == "No Key")){   //check first two letters
+            tempCurrentString = currentString + checker;
+            tempMorseInput = morseInput;
+            tempMorseInput.erase(0,3);
+            morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
+
+            if(morseOutput != "Failure"){
+                return morseOutput;
+            }
+        }
+    }
+
+    if(morseInput.size() >= 4){ //check first three letters
+        copy(morseInput, morseInput + 4, tempMorseInput);
+        checker = maps(tempMorseInput);
+        if(!(checker == "No Key")){   //check first two letters
+            tempCurrentString = currentString + checker;
+            tempMorseInput = morseInput;
+            tempMorseInput.erase(0,4);
+            morseOutput = morseCodeDecipher01(tempMorseInput, tempCurrentString);
+
+            if(morseOutput != "Failure"){ 
+                return morseOutput;
+            }
+        }
+    }
+
+
+    return "No Matching Word.\n";
 
 }
+
