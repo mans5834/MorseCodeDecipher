@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 #include "maps.h"
 
 Dictionary currentKnownWords; //create the dictionary that will be searched
@@ -26,15 +27,43 @@ int introduction(){ //Explains intitial instructions for program use
 }
 
 void createDictionary(){
-    currentKnownWords.insertIntoTree("HELLO");
-    currentKnownWords.insertIntoTree("WORLD");
-    currentKnownWords.insertIntoTree("HI");
-    currentKnownWords.insertIntoTree("HOW");
-    currentKnownWords.insertIntoTree("ARE");
-    currentKnownWords.insertIntoTree("YOU");
+    string wordsToInsert[] = {"HELLO", "WORLD", 
+			      "ARE", "AT", 
+		              "BE", "BASIC", 
+			      "CAR", "CAT", 
+                              "DUCK", "DRIVE", 
+			      "ENTER", "EXIT", 
+		              "FAR", "FAIR",
+			      "GATE", "GRAB",
+			      "HAT", "HARD",
+			      "I", "IN",
+			      "JAB", "JACKET",
+			      "KING", "KOALA",
+			      "LOVE", "LAUGH",
+			      "MONEY", "MAD",
+			      "NO", "NOTHING",
+			      "OTHER", "OUT",
+			      "PEOPLE", "PARK",
+			      "QUESTION", "QUARTER",
+			      "RIGHT", "REACH",
+			      "SAY", "SINK",
+			      "TEETH", "TOUGH",
+		              "UNDER", "OUT",
+			      "VERY", "VARYING",
+			      "WHERE", "WEAR",
+			      "XEROX", "XERIC",
+			      "YES", "YOUR",
+			      "ZIP", "ZAG"};
+    int size = 54;
+
+    for(int i = 0; i < size; i++){
+        currentKnownWords.insertIntoTree(wordsToInsert[i]);
+    }
+
 }
 
 string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers morse code. moresInput is what is left of the string and currentString is what is being added to
+    cout << "h\n";
 
     string morseOutput, checker, tempCurrentString;
     string tempMorseInput;

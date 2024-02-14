@@ -66,7 +66,7 @@ class Dictionary{
 	    root = new treeNode();
   	}
         
-        void insertIntoTree(const string &newWord){
+        void insertIntoTree(string &newWord){
 	    treeNode* temp = root; //holds the current node
 	    for(int i = 0; i < newWord.size(); i++){
 		char c = newWord[i];
