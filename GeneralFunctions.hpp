@@ -63,8 +63,6 @@ void createDictionary(){
 }
 
 string morseCodeDecipher01(string morseInput, string currentString){ //Deciphers morse code. moresInput is what is left of the string and currentString is what is being added to
-    cout << "h\n";
-
     string morseOutput, checker, tempCurrentString;
     string tempMorseInput;
 
