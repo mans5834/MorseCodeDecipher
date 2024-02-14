@@ -73,7 +73,7 @@ class Dictionary{
 	        if(temp->children.find(c) == temp->children.end()){ //checks if the character is in any of the children nodes yet
 		    temp->children[c] = new treeNode(); //expand the tree and make the new child able to have children
 		}
-		
+		temp->endOfWord = false; //not the end of the word anymore
 		temp = temp->children[c];
 	    }
             
@@ -89,6 +89,10 @@ class Dictionary{
 		}
 		temp = temp->children[c];
             }
-            return true;
+	    if(temp->endOfWord == true){ //makesure you dont return something like "HEL" even though the word is "HELLO"
+            	return true;
+	    }else{
+		return false;
+	    }    
 	}
 };
