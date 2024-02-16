@@ -1,3 +1,10 @@
+/*
+   * This program will decipher morse code word that have no breaks between letters
+   * To ocmpile:
+      * g++ main.cpp
+      * ./a.out 
+*/
+
 #include "GeneralFunctions.hpp"
 
 
